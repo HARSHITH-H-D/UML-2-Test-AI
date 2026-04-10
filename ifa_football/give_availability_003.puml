@@ -1,0 +1,16 @@
+@startuml
+actor Referee
+usecase GiveAvailability
+usecase CheckSchedule
+usecase UpdateAvailability
+usecase ReceiveNotification
+class SchedulingSystem
+class NotificationService
+
+Referee --> GiveAvailability
+GiveAvailability --> CheckSchedule
+CheckSchedule --> UpdateAvailability
+UpdateAvailability --> ReceiveNotification
+ReceiveNotification --> SchedulingSystem
+SchedulingSystem --> NotificationService
+@enduml

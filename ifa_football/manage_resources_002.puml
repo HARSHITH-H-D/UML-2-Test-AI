@@ -1,0 +1,22 @@
+@startuml
+actor Team
+actor IFAAdministration
+usecase PurchaseResource
+usecase UseResource
+usecase SellResource
+usecase CheckLegality
+usecase ApproveTransaction
+usecase OverrideDisapproval
+class ResourceSystem
+
+Team --> PurchaseResource
+Team --> UseResource
+Team --> SellResource
+PurchaseResource --> CheckLegality
+UseResource --> CheckLegality
+SellResource --> CheckLegality
+CheckLegality --> ApproveTransaction
+ApproveTransaction --> ResourceSystem
+IFAAdministration --> OverrideDisapproval
+OverrideDisapproval --> ResourceSystem
+@enduml

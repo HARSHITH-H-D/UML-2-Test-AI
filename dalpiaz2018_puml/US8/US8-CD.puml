@@ -1,0 +1,36 @@
+@startuml
+class Tarea
+class Trabajador_campamento
+class Tutor_campista
+class Miembro_personal_campamento
+class Recordatorio
+class Regla
+class Reparación
+class Suministro
+class Pariente_campista
+class Pago
+class Mensaje
+class Grupo
+class Gerente
+class Informe_finalización
+class Formulario_registro
+class Formulario
+class Foto
+class Formulario_médico
+class Formulario_consentimiento
+class Actividad
+class Consejero
+class Asistencia
+class Instalación_interna
+class Reserva
+class Campista
+class Ubicación
+class Etiqueta_identificacion
+class Administrador_campamento
+class Base_datos
+class Evento
+class Calendario
+class Firma
+class Cuenta
+
+@enduml

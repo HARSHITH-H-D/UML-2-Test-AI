@@ -1,0 +1,18 @@
+@startuml
+actor IFAAdministration
+actor Team
+usecase AuditBudgets
+usecase OpenBudget
+usecase CheckTransactions
+usecase ApproveBudget
+usecase NotifyTeam
+class BudgetSystem
+
+IFAAdministration --> AuditBudgets
+AuditBudgets --> OpenBudget
+OpenBudget --> CheckTransactions
+CheckTransactions --> ApproveBudget
+ApproveBudget --> NotifyTeam
+NotifyTeam --> BudgetSystem
+Team --> BudgetSystem
+@enduml

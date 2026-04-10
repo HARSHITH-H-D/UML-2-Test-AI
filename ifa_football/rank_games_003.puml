@@ -1,0 +1,16 @@
+@startuml
+actor IFAAdministration
+usecase RankGames
+usecase ValidateReport
+usecase ApplyRankingRules
+usecase UpdatePortal
+class RankingSystem
+class RankingEngine
+
+IFAAdministration --> RankGames
+RankGames --> ValidateReport
+ValidateReport --> ApplyRankingRules
+ApplyRankingRules --> UpdatePortal
+UpdatePortal --> RankingSystem
+RankingSystem --> RankingEngine
+@enduml

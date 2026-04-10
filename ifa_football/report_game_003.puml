@@ -1,0 +1,18 @@
+@startuml
+actor Referee
+usecase StartGame
+usecase RecordEvent
+usecase ManageHalfTime
+usecase EndGame
+usecase AddSummary
+class PortableDevice
+class GameReportSystem
+
+Referee --> StartGame
+StartGame --> RecordEvent
+RecordEvent --> ManageHalfTime
+ManageHalfTime --> EndGame
+EndGame --> AddSummary
+AddSummary --> PortableDevice
+PortableDevice --> GameReportSystem
+@enduml

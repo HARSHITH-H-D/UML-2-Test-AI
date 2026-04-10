@@ -1,0 +1,4 @@
+@startuml
+actor trabajador_campamento
+
+@enduml

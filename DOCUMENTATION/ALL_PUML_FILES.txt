@@ -1,0 +1,812 @@
+# IFA FOOTBALL MANAGEMENT SYSTEM - ALL PUML FILES
+# Generated for Model Training Based on g03-uc-req-cm.pdf
+
+################################################################################
+# USE CASE 1: REPORT GAME (3 Variations)
+################################################################################
+
+# ============================================================================
+# FILE: report_game_001.puml
+# DESCRIPTION: Sequential flow from start to submit
+# ============================================================================
+@startuml
+actor Referee
+usecase ReportGame
+usecase StartGame
+usecase RecordEvent
+usecase ManageExtraTime
+usecase EndGame
+usecase SubmitReport
+class GameReportSystem
+
+Referee --> ReportGame
+ReportGame --> StartGame
+StartGame --> RecordEvent
+RecordEvent --> ManageExtraTime
+ManageExtraTime --> EndGame
+EndGame --> SubmitReport
+SubmitReport --> GameReportSystem
+@enduml
+
+# ============================================================================
+# FILE: report_game_002.puml
+# DESCRIPTION: Event-focused with multiple event types
+# ============================================================================
+@startuml
+actor Referee
+actor IFAAdministration
+usecase ReportGame
+usecase RecordFoul
+usecase RecordMisconduct
+usecase RecordInjury
+usecase SaveReport
+class GameSystem
+
+Referee --> ReportGame
+ReportGame --> RecordFoul
+ReportGame --> RecordMisconduct
+ReportGame --> RecordInjury
+RecordFoul --> SaveReport
+RecordMisconduct --> SaveReport
+RecordInjury --> SaveReport
+SaveReport --> GameSystem
+IFAAdministration --> GameSystem
+@enduml
+
+# ============================================================================
+# FILE: report_game_003.puml
+# DESCRIPTION: System architecture perspective
+# ============================================================================
+@startuml
+actor Referee
+usecase StartGame
+usecase RecordEvent
+usecase ManageHalfTime
+usecase EndGame
+usecase AddSummary
+class PortableDevice
+class GameReportSystem
+
+Referee --> StartGame
+StartGame --> RecordEvent
+RecordEvent --> ManageHalfTime
+ManageHalfTime --> EndGame
+EndGame --> AddSummary
+AddSummary --> PortableDevice
+PortableDevice --> GameReportSystem
+@enduml
+
+################################################################################
+# USE CASE 2: GIVE AVAILABILITY (3 Variations)
+################################################################################
+
+# ============================================================================
+# FILE: give_availability_001.puml
+# DESCRIPTION: Basic availability submission flow
+# ============================================================================
+@startuml
+actor Referee
+usecase GiveAvailability
+usecase CheckCalendar
+usecase FillAvailability
+usecase ConfirmSchedule
+class SchedulingSystem
+
+Referee --> GiveAvailability
+GiveAvailability --> CheckCalendar
+CheckCalendar --> FillAvailability
+FillAvailability --> ConfirmSchedule
+ConfirmSchedule --> SchedulingSystem
+@enduml
+
+# ============================================================================
+# FILE: give_availability_002.puml
+# DESCRIPTION: Multi-actor perspective with validation
+# ============================================================================
+@startuml
+actor Referee
+actor IFAAdministration
+usecase CheckCalendar
+usecase EnterAvailability
+usecase ValidateSchedule
+usecase NotifySchedule
+class SchedulingSystem
+
+Referee --> CheckCalendar
+CheckCalendar --> EnterAvailability
+EnterAvailability --> ValidateSchedule
+ValidateSchedule --> NotifySchedule
+NotifySchedule --> SchedulingSystem
+IFAAdministration --> SchedulingSystem
+@enduml
+
+# ============================================================================
+# FILE: give_availability_003.puml
+# DESCRIPTION: Notification-focused flow
+# ============================================================================
+@startuml
+actor Referee
+usecase GiveAvailability
+usecase CheckSchedule
+usecase UpdateAvailability
+usecase ReceiveNotification
+class SchedulingSystem
+class NotificationService
+
+Referee --> GiveAvailability
+GiveAvailability --> CheckSchedule
+CheckSchedule --> UpdateAvailability
+UpdateAvailability --> ReceiveNotification
+ReceiveNotification --> SchedulingSystem
+SchedulingSystem --> NotificationService
+@enduml
+
+################################################################################
+# USE CASE 3: SCHEDULE REFEREES (3 Variations)
+################################################################################
+
+# ============================================================================
+# FILE: schedule_referees_001.puml
+# DESCRIPTION: Complete scheduling workflow
+# ============================================================================
+@startuml
+actor IFAAdministration
+actor Referee
+usecase ScheduleReferees
+usecase CollectAvailability
+usecase AutoGenerateSchedule
+usecase CheckSchedule
+usecase ConfirmSchedule
+usecase NotifyReferees
+class SchedulingSystem
+
+IFAAdministration --> ScheduleReferees
+Referee --> CollectAvailability
+CollectAvailability --> AutoGenerateSchedule
+AutoGenerateSchedule --> CheckSchedule
+CheckSchedule --> ConfirmSchedule
+ConfirmSchedule --> NotifyReferees
+NotifyReferees --> SchedulingSystem
+@enduml
+
+# ============================================================================
+# FILE: schedule_referees_002.puml
+# DESCRIPTION: Policy-driven scheduling
+# ============================================================================
+@startuml
+actor IFAAdministration
+usecase ScheduleReferees
+usecase ValidateAvailability
+usecase GenerateSchedule
+usecase ApplyPolicy
+usecase NotifyReferees
+class SchedulingSystem
+class PolicyEngine
+
+IFAAdministration --> ScheduleReferees
+ScheduleReferees --> ValidateAvailability
+ValidateAvailability --> GenerateSchedule
+GenerateSchedule --> ApplyPolicy
+ApplyPolicy --> NotifyReferees
+NotifyReferees --> SchedulingSystem
+SchedulingSystem --> PolicyEngine
+@enduml
+
+# ============================================================================
+# FILE: schedule_referees_003.puml
+# DESCRIPTION: Automated scheduler perspective
+# ============================================================================
+@startuml
+actor IFAAdministration
+actor Referee
+usecase RunScheduling
+usecase CheckConstraints
+usecase AssignReferees
+usecase ConfirmAssignments
+class AutomatedScheduler
+
+IFAAdministration --> RunScheduling
+RunScheduling --> CheckConstraints
+CheckConstraints --> AssignReferees
+AssignReferees --> ConfirmAssignments
+ConfirmAssignments --> AutomatedScheduler
+Referee --> AutomatedScheduler
+@enduml
+
+################################################################################
+# USE CASE 4: RANK GAMES (3 Variations)
+################################################################################
+
+# ============================================================================
+# FILE: rank_games_001.puml
+# DESCRIPTION: Approval to publication flow
+# ============================================================================
+@startuml
+actor IFAAdministration
+usecase RankGames
+usecase ApproveGameReport
+usecase CalculateRanking
+usecase UpdateRanking
+usecase PublishRanking
+class RankingSystem
+
+IFAAdministration --> RankGames
+RankGames --> ApproveGameReport
+ApproveGameReport --> CalculateRanking
+CalculateRanking --> UpdateRanking
+UpdateRanking --> PublishRanking
+PublishRanking --> RankingSystem
+@enduml
+
+# ============================================================================
+# FILE: rank_games_002.puml
+# DESCRIPTION: Multi-actor with team viewing
+# ============================================================================
+@startuml
+actor IFAAdministration
+actor Team
+usecase ApproveReport
+usecase CalculateRanking
+usecase UpdateLeague
+usecase ViewRanking
+class RankingSystem
+class Portal
+
+IFAAdministration --> ApproveReport
+ApproveReport --> CalculateRanking
+CalculateRanking --> UpdateLeague
+UpdateLeague --> RankingSystem
+RankingSystem --> Portal
+Team --> ViewRanking
+ViewRanking --> Portal
+@enduml
+
+# ============================================================================
+# FILE: rank_games_003.puml
+# DESCRIPTION: Rules engine focused
+# ============================================================================
+@startuml
+actor IFAAdministration
+usecase RankGames
+usecase ValidateReport
+usecase ApplyRankingRules
+usecase UpdatePortal
+class RankingSystem
+class RankingEngine
+
+IFAAdministration --> RankGames
+RankGames --> ValidateReport
+ValidateReport --> ApplyRankingRules
+ApplyRankingRules --> UpdatePortal
+UpdatePortal --> RankingSystem
+RankingSystem --> RankingEngine
+@enduml
+
+################################################################################
+# USE CASE 5: MANAGE RESOURCES (3 Variations)
+################################################################################
+
+# ============================================================================
+# FILE: manage_resources_001.puml
+# DESCRIPTION: Transaction validation flow
+# ============================================================================
+@startuml
+actor Team
+actor IFAAdministration
+usecase ManageResources
+usecase EnterTransaction
+usecase ValidateAction
+usecase ApproveAction
+usecase NotifyParties
+class ResourceManagementSystem
+
+Team --> ManageResources
+ManageResources --> EnterTransaction
+EnterTransaction --> ValidateAction
+ValidateAction --> ApproveAction
+ApproveAction --> NotifyParties
+NotifyParties --> ResourceManagementSystem
+IFAAdministration --> ResourceManagementSystem
+@enduml
+
+# ============================================================================
+# FILE: manage_resources_002.puml
+# DESCRIPTION: Resource type operations
+# ============================================================================
+@startuml
+actor Team
+actor IFAAdministration
+usecase PurchaseResource
+usecase UseResource
+usecase SellResource
+usecase CheckLegality
+usecase ApproveTransaction
+usecase OverrideDisapproval
+class ResourceSystem
+
+Team --> PurchaseResource
+Team --> UseResource
+Team --> SellResource
+PurchaseResource --> CheckLegality
+UseResource --> CheckLegality
+SellResource --> CheckLegality
+CheckLegality --> ApproveTransaction
+ApproveTransaction --> ResourceSystem
+IFAAdministration --> OverrideDisapproval
+OverrideDisapproval --> ResourceSystem
+@enduml
+
+# ============================================================================
+# FILE: manage_resources_003.puml
+# DESCRIPTION: Policy engine and override flow
+# ============================================================================
+@startuml
+actor TeamAdministrator
+actor IFAAdministration
+usecase EnterTransaction
+usecase AutomaticValidation
+usecase ProcessApproval
+usecase LogOverride
+class PolicyEngine
+class ResourceSystem
+
+TeamAdministrator --> EnterTransaction
+EnterTransaction --> AutomaticValidation
+AutomaticValidation --> ProcessApproval
+ProcessApproval --> PolicyEngine
+PolicyEngine --> ResourceSystem
+IFAAdministration --> LogOverride
+LogOverride --> ResourceSystem
+@enduml
+
+################################################################################
+# USE CASE 6: AUDIT BUDGETS (3 Variations)
+################################################################################
+
+# ============================================================================
+# FILE: audit_budgets_001.puml
+# DESCRIPTION: Basic audit workflow
+# ============================================================================
+@startuml
+actor IFAAdministration
+actor Team
+usecase AuditBudgets
+usecase OpenBudget
+usecase CheckTransactions
+usecase ApproveBudget
+usecase NotifyTeam
+class BudgetSystem
+
+IFAAdministration --> AuditBudgets
+AuditBudgets --> OpenBudget
+OpenBudget --> CheckTransactions
+CheckTransactions --> ApproveBudget
+ApproveBudget --> NotifyTeam
+NotifyTeam --> BudgetSystem
+Team --> BudgetSystem
+@enduml
+
+# ============================================================================
+# FILE: audit_budgets_002.puml
+# DESCRIPTION: Approval/disapproval branches
+# ============================================================================
+@startuml
+actor IFAAdministration
+usecase ReceiveNotification
+usecase AuditBudget
+usecase ValidateTransactions
+usecase ApproveBudget
+usecase DisapproveBudget
+usecase SendFeedback
+class QuarterlyAuditSystem
+
+IFAAdministration --> ReceiveNotification
+ReceiveNotification --> AuditBudget
+AuditBudget --> ValidateTransactions
+ValidateTransactions --> ApproveBudget
+ValidateTransactions --> DisapproveBudget
+DisapproveBudget --> SendFeedback
+ApproveBudget --> QuarterlyAuditSystem
+SendFeedback --> QuarterlyAuditSystem
+@enduml
+
+# ============================================================================
+# FILE: audit_budgets_003.puml
+# DESCRIPTION: Quarterly compliance checking
+# ============================================================================
+@startuml
+actor IFAAdministration
+actor Team
+usecase QuarterlyAudit
+usecase ReviewBudget
+usecase CheckCompliance
+usecase ProvideApproval
+class BudgetAuditSystem
+class PolicyChecker
+
+IFAAdministration --> QuarterlyAudit
+QuarterlyAudit --> ReviewBudget
+ReviewBudget --> CheckCompliance
+CheckCompliance --> ProvideApproval
+ProvideApproval --> BudgetAuditSystem
+BudgetAuditSystem --> PolicyChecker
+Team --> BudgetAuditSystem
+@enduml
+
+################################################################################
+# COMPREHENSIVE CLASS DIAGRAM
+################################################################################
+
+# ============================================================================
+# FILE: ifa_class_diagram.puml
+# DESCRIPTION: Complete domain model with all entities and relationships
+# ============================================================================
+@startuml
+' IFA Football Management System - Class Diagram
+
+class Referee {
+  -refereeId: String
+  -name: String
+  -language: String
+  -availability: List<Date>
+  +reportGame()
+  +giveAvailability()
+  +checkSchedule()
+}
+
+class IFAAdministration {
+  -adminId: String
+  -name: String
+  +scheduleReferees()
+  +approveGameReport()
+  +auditBudget()
+  +manageResources()
+}
+
+class Team {
+  -teamId: String
+  -name: String
+  -budget: Double
+  +manageResources()
+  +viewRanking()
+}
+
+class GameReport {
+  -reportId: String
+  -gameId: String
+  -date: Date
+  -events: List<Event>
+  -summary: String
+  +addEvent()
+  +submitReport()
+  +editReport()
+}
+
+class Event {
+  -eventId: String
+  -type: String
+  -timestamp: Time
+  -description: String
+}
+
+class Schedule {
+  -scheduleId: String
+  -season: String
+  -assignments: List<Assignment>
+  +generateSchedule()
+  +validateSchedule()
+  +notifyReferees()
+}
+
+class Assignment {
+  -assignmentId: String
+  -gameId: String
+  -refereeId: String
+  -date: Date
+}
+
+class Ranking {
+  -rankingId: String
+  -leagueId: String
+  -standings: List<TeamStanding>
+  +calculateRanking()
+  +updateRanking()
+  +publishRanking()
+}
+
+class TeamStanding {
+  -teamId: String
+  -position: Integer
+  -points: Integer
+  -played: Integer
+}
+
+class Resource {
+  -resourceId: String
+  -type: String
+  -value: Double
+  +validateTransaction()
+  +approveTransaction()
+}
+
+class Budget {
+  -budgetId: String
+  -teamId: String
+  -amount: Double
+  -transactions: List<Transaction>
+  +auditBudget()
+  +checkCompliance()
+}
+
+class Transaction {
+  -transactionId: String
+  -type: String
+  -amount: Double
+  -date: Date
+}
+
+class GameReportSystem {
+  +saveReport()
+  +closeGame()
+  +notifyAdmin()
+}
+
+class SchedulingSystem {
+  +autoGenerateSchedule()
+  +applyPolicy()
+  +sendNotifications()
+}
+
+class RankingSystem {
+  +calculateNewRanking()
+  +updatePortal()
+}
+
+class ResourceManagementSystem {
+  +checkLegality()
+  +processApproval()
+  +logAction()
+}
+
+class BudgetAuditSystem {
+  +scheduleQuarterlyAudit()
+  +validateTransactions()
+  +sendFeedback()
+}
+
+' Relationships
+Referee "1" -- "*" GameReport : creates
+Referee "1" -- "*" Assignment : assigned to
+IFAAdministration "1" -- "*" GameReport : approves
+IFAAdministration "1" -- "1" Schedule : manages
+IFAAdministration "1" -- "*" Budget : audits
+IFAAdministration "1" -- "1" ResourceManagementSystem : oversees
+Team "1" -- "*" Resource : owns
+Team "1" -- "1" Budget : has
+Team "1" -- "1" TeamStanding : appears in
+GameReport "1" -- "*" Event : contains
+Schedule "1" -- "*" Assignment : contains
+Ranking "1" -- "*" TeamStanding : contains
+Budget "1" -- "*" Transaction : tracks
+GameReportSystem -- GameReport : manages
+SchedulingSystem -- Schedule : generates
+RankingSystem -- Ranking : updates
+ResourceManagementSystem -- Resource : validates
+BudgetAuditSystem -- Budget : audits
+
+@enduml
+
+################################################################################
+# SEQUENCE DIAGRAMS
+################################################################################
+
+# ============================================================================
+# FILE: report_game_sequence.puml
+# DESCRIPTION: Detailed interaction for game reporting
+# ============================================================================
+@startuml
+actor Referee
+participant "GameReportSystem" as System
+participant "GameReport" as Report
+participant "Event" as Event
+database "Database" as DB
+
+Referee -> System: startGame()
+activate System
+System -> Report: create()
+activate Report
+Report --> System: gameStarted
+System --> Referee: showEvents()
+deactivate System
+
+loop During Game
+  Referee -> System: selectEvent(eventType)
+  activate System
+  System -> Event: create(eventType)
+  activate Event
+  Event --> System: eventCreated
+  deactivate Event
+  System -> Report: addEvent(event)
+  Report --> System: eventAdded
+  System --> Referee: eventRecorded
+  deactivate System
+end
+
+Referee -> System: announceExtraTime(minutes)
+activate System
+System -> Report: addExtraTime(minutes)
+Report --> System: extraTimeAdded
+System --> Referee: extraTimeRecorded
+deactivate System
+
+Referee -> System: announceHalfTime()
+activate System
+System -> Report: markHalfTime()
+Report --> System: halfTimeMarked
+System --> Referee: breakStarted
+deactivate System
+
+Referee -> System: endGame()
+activate System
+System -> Report: closeGame()
+Report --> System: gameClosed
+System --> Referee: showSummaryForm()
+deactivate System
+
+Referee -> System: addSummary(text)
+activate System
+System -> Report: addSummary(text)
+Report --> System: summaryAdded
+System --> Referee: readyToSubmit
+deactivate System
+
+Referee -> System: submitReport()
+activate System
+System -> Report: finalize()
+Report -> DB: save()
+DB --> Report: saved
+Report --> System: reportSubmitted
+System --> Referee: confirmationMessage
+deactivate System
+deactivate Report
+
+@enduml
+
+# ============================================================================
+# FILE: schedule_referees_sequence.puml
+# DESCRIPTION: Scheduling workflow with timing
+# ============================================================================
+@startuml
+actor IFAAdministration as Admin
+actor Referee
+participant "SchedulingSystem" as System
+participant "Schedule" as Schedule
+participant "PolicyEngine" as Policy
+database "Database" as DB
+
+Referee -> System: submitAvailability(dates)
+activate System
+System -> DB: saveAvailability(refereeId, dates)
+DB --> System: saved
+System --> Referee: availabilityConfirmed
+deactivate System
+
+Admin -> System: runAutoScheduling()
+activate System
+System -> DB: getAllAvailabilities()
+DB --> System: availabilityList
+
+System -> Schedule: create()
+activate Schedule
+Schedule --> System: scheduleCreated
+
+System -> Policy: validateConstraints()
+activate Policy
+Policy --> System: constraintsValid
+deactivate Policy
+
+System -> Schedule: generateAssignments()
+Schedule --> System: assignmentsGenerated
+System --> Admin: showSchedule()
+deactivate System
+
+Admin -> System: reviewSchedule()
+activate System
+System -> Schedule: getDetails()
+Schedule --> System: scheduleDetails
+System --> Admin: displaySchedule
+deactivate System
+
+Admin -> System: confirmSchedule()
+activate System
+System -> Schedule: finalize()
+Schedule -> DB: save()
+DB --> Schedule: saved
+Schedule --> System: scheduleConfirmed
+
+System -> Referee: notifyAssignment(assignment)
+Referee --> System: acknowledged
+
+System --> Admin: allRefereesNotified
+deactivate System
+deactivate Schedule
+
+@enduml
+
+# ============================================================================
+# FILE: manage_resources_sequence.puml
+# DESCRIPTION: Resource management with approval/override flows
+# ============================================================================
+@startuml
+actor Team
+actor IFAAdministration as Admin
+participant "ResourceManagementSystem" as System
+participant "PolicyEngine" as Policy
+participant "Resource" as Resource
+database "Database" as DB
+
+Team -> System: enterTransaction(type, details)
+activate System
+System -> Resource: create(type, details)
+activate Resource
+Resource --> System: resourceCreated
+
+System -> Policy: checkLegality(transaction)
+activate Policy
+Policy -> DB: getPolicyRules()
+DB --> Policy: rules
+Policy -> Policy: validate(transaction, rules)
+
+alt Transaction is Legal
+  Policy --> System: approved
+  deactivate Policy
+  
+  System -> Resource: approve()
+  Resource -> DB: save()
+  DB --> Resource: saved
+  Resource --> System: transactionApproved
+  
+  System -> Team: notifyApproval()
+  System -> Admin: notifyApproval()
+  System --> Team: confirmationMessage
+  
+else Transaction is Illegal
+  Policy --> System: rejected(reason)
+  deactivate Policy
+  
+  System -> Admin: notifyRejection(reason)
+  activate Admin
+  
+  alt Admin Confirms Rejection
+    Admin -> System: confirmRejection()
+    System -> Resource: reject()
+    Resource --> System: rejected
+    System -> Team: notifyRejection(reason)
+    System --> Team: transactionRejected
+    
+  else Admin Overrides
+    Admin -> System: overrideRejection(justification)
+    System -> Admin: logOverride(justification)
+    Admin -> Admin: reviewLog()
+    Admin -> System: confirmOverride()
+    
+    System -> Resource: approveWithOverride()
+    Resource -> DB: save()
+    DB --> Resource: saved
+    Resource --> System: approved
+    
+    System -> Team: notifyApproval()
+    System --> Team: transactionApproved
+  end
+  
+  deactivate Admin
+end
+
+deactivate System
+deactivate Resource
+
+@enduml
+
+################################################################################
+# END OF FILE
+################################################################################

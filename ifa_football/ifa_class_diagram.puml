@@ -1,0 +1,154 @@
+@startuml
+' IFA Football Management System - Class Diagram
+
+class Referee {
+  -refereeId: String
+  -name: String
+  -language: String
+  -availability: List<Date>
+  +reportGame()
+  +giveAvailability()
+  +checkSchedule()
+}
+
+class IFAAdministration {
+  -adminId: String
+  -name: String
+  +scheduleReferees()
+  +approveGameReport()
+  +auditBudget()
+  +manageResources()
+}
+
+class Team {
+  -teamId: String
+  -name: String
+  -budget: Double
+  +manageResources()
+  +viewRanking()
+}
+
+class GameReport {
+  -reportId: String
+  -gameId: String
+  -date: Date
+  -events: List<Event>
+  -summary: String
+  +addEvent()
+  +submitReport()
+  +editReport()
+}
+
+class Event {
+  -eventId: String
+  -type: String
+  -timestamp: Time
+  -description: String
+}
+
+class Schedule {
+  -scheduleId: String
+  -season: String
+  -assignments: List<Assignment>
+  +generateSchedule()
+  +validateSchedule()
+  +notifyReferees()
+}
+
+class Assignment {
+  -assignmentId: String
+  -gameId: String
+  -refereeId: String
+  -date: Date
+}
+
+class Ranking {
+  -rankingId: String
+  -leagueId: String
+  -standings: List<TeamStanding>
+  +calculateRanking()
+  +updateRanking()
+  +publishRanking()
+}
+
+class TeamStanding {
+  -teamId: String
+  -position: Integer
+  -points: Integer
+  -played: Integer
+}
+
+class Resource {
+  -resourceId: String
+  -type: String
+  -value: Double
+  +validateTransaction()
+  +approveTransaction()
+}
+
+class Budget {
+  -budgetId: String
+  -teamId: String
+  -amount: Double
+  -transactions: List<Transaction>
+  +auditBudget()
+  +checkCompliance()
+}
+
+class Transaction {
+  -transactionId: String
+  -type: String
+  -amount: Double
+  -date: Date
+}
+
+class GameReportSystem {
+  +saveReport()
+  +closeGame()
+  +notifyAdmin()
+}
+
+class SchedulingSystem {
+  +autoGenerateSchedule()
+  +applyPolicy()
+  +sendNotifications()
+}
+
+class RankingSystem {
+  +calculateNewRanking()
+  +updatePortal()
+}
+
+class ResourceManagementSystem {
+  +checkLegality()
+  +processApproval()
+  +logAction()
+}
+
+class BudgetAuditSystem {
+  +scheduleQuarterlyAudit()
+  +validateTransactions()
+  +sendFeedback()
+}
+
+' Relationships
+Referee "1" -- "*" GameReport : creates
+Referee "1" -- "*" Assignment : assigned to
+IFAAdministration "1" -- "*" GameReport : approves
+IFAAdministration "1" -- "1" Schedule : manages
+IFAAdministration "1" -- "*" Budget : audits
+IFAAdministration "1" -- "1" ResourceManagementSystem : oversees
+Team "1" -- "*" Resource : owns
+Team "1" -- "1" Budget : has
+Team "1" -- "1" TeamStanding : appears in
+GameReport "1" -- "*" Event : contains
+Schedule "1" -- "*" Assignment : contains
+Ranking "1" -- "*" TeamStanding : contains
+Budget "1" -- "*" Transaction : tracks
+GameReportSystem -- GameReport : manages
+SchedulingSystem -- Schedule : generates
+RankingSystem -- Ranking : updates
+ResourceManagementSystem -- Resource : validates
+BudgetAuditSystem -- Budget : audits
+
+@enduml

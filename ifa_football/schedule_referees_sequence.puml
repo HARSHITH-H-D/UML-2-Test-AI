@@ -1,0 +1,56 @@
+@startuml
+actor IFAAdministration as Admin
+actor Referee
+participant "SchedulingSystem" as System
+participant "Schedule" as Schedule
+participant "PolicyEngine" as Policy
+database "Database" as DB
+
+Referee -> System: submitAvailability(dates)
+activate System
+System -> DB: saveAvailability(refereeId, dates)
+DB --> System: saved
+System --> Referee: availabilityConfirmed
+deactivate System
+
+Admin -> System: runAutoScheduling()
+activate System
+System -> DB: getAllAvailabilities()
+DB --> System: availabilityList
+
+System -> Schedule: create()
+activate Schedule
+Schedule --> System: scheduleCreated
+
+System -> Policy: validateConstraints()
+activate Policy
+Policy --> System: constraintsValid
+deactivate Policy
+
+System -> Schedule: generateAssignments()
+Schedule --> System: assignmentsGenerated
+System --> Admin: showSchedule()
+deactivate System
+
+Admin -> System: reviewSchedule()
+activate System
+System -> Schedule: getDetails()
+Schedule --> System: scheduleDetails
+System --> Admin: displaySchedule
+deactivate System
+
+Admin -> System: confirmSchedule()
+activate System
+System -> Schedule: finalize()
+Schedule -> DB: save()
+DB --> Schedule: saved
+Schedule --> System: scheduleConfirmed
+
+System -> Referee: notifyAssignment(assignment)
+Referee --> System: acknowledged
+
+System --> Admin: allRefereesNotified
+deactivate System
+deactivate Schedule
+
+@enduml

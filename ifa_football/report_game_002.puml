@@ -1,0 +1,20 @@
+@startuml
+actor Referee
+actor IFAAdministration
+usecase ReportGame
+usecase RecordFoul
+usecase RecordMisconduct
+usecase RecordInjury
+usecase SaveReport
+class GameSystem
+
+Referee --> ReportGame
+ReportGame --> RecordFoul
+ReportGame --> RecordMisconduct
+ReportGame --> RecordInjury
+RecordFoul --> SaveReport
+RecordMisconduct --> SaveReport
+RecordInjury --> SaveReport
+SaveReport --> GameSystem
+IFAAdministration --> GameSystem
+@enduml

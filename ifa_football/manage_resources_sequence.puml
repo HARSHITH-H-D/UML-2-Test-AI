@@ -1,0 +1,69 @@
+@startuml
+actor Team
+actor IFAAdministration as Admin
+participant "ResourceManagementSystem" as System
+participant "PolicyEngine" as Policy
+participant "Resource" as Resource
+database "Database" as DB
+
+Team -> System: enterTransaction(type, details)
+activate System
+System -> Resource: create(type, details)
+activate Resource
+Resource --> System: resourceCreated
+
+System -> Policy: checkLegality(transaction)
+activate Policy
+Policy -> DB: getPolicyRules()
+DB --> Policy: rules
+Policy -> Policy: validate(transaction, rules)
+
+alt Transaction is Legal
+  Policy --> System: approved
+  deactivate Policy
+  
+  System -> Resource: approve()
+  Resource -> DB: save()
+  DB --> Resource: saved
+  Resource --> System: transactionApproved
+  
+  System -> Team: notifyApproval()
+  System -> Admin: notifyApproval()
+  System --> Team: confirmationMessage
+  
+else Transaction is Illegal
+  Policy --> System: rejected(reason)
+  deactivate Policy
+  
+  System -> Admin: notifyRejection(reason)
+  activate Admin
+  
+  alt Admin Confirms Rejection
+    Admin -> System: confirmRejection()
+    System -> Resource: reject()
+    Resource --> System: rejected
+    System -> Team: notifyRejection(reason)
+    System --> Team: transactionRejected
+    
+  else Admin Overrides
+    Admin -> System: overrideRejection(justification)
+    System -> Admin: logOverride(justification)
+    Admin -> Admin: reviewLog()
+    Admin -> System: confirmOverride()
+    
+    System -> Resource: approveWithOverride()
+    Resource -> DB: save()
+    DB --> Resource: saved
+    Resource --> System: approved
+    
+    System -> Team: notifyApproval()
+    System --> Team: transactionApproved
+  end
+  
+  deactivate Admin
+end
+
+deactivate System
+deactivate Resource
+
+@enduml

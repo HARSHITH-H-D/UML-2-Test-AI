@@ -1,0 +1,16 @@
+@startuml
+actor IFAAdministration
+actor Referee
+usecase RunScheduling
+usecase CheckConstraints
+usecase AssignReferees
+usecase ConfirmAssignments
+class AutomatedScheduler
+
+IFAAdministration --> RunScheduling
+RunScheduling --> CheckConstraints
+CheckConstraints --> AssignReferees
+AssignReferees --> ConfirmAssignments
+ConfirmAssignments --> AutomatedScheduler
+Referee --> AutomatedScheduler
+@enduml

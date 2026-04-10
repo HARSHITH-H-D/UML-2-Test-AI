@@ -1,0 +1,16 @@
+@startuml
+actor Referee
+actor IFAAdministration
+usecase CheckCalendar
+usecase EnterAvailability
+usecase ValidateSchedule
+usecase NotifySchedule
+class SchedulingSystem
+
+Referee --> CheckCalendar
+CheckCalendar --> EnterAvailability
+EnterAvailability --> ValidateSchedule
+ValidateSchedule --> NotifySchedule
+NotifySchedule --> SchedulingSystem
+IFAAdministration --> SchedulingSystem
+@enduml

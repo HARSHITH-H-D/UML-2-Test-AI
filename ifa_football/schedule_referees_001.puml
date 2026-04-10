@@ -1,0 +1,19 @@
+@startuml
+actor IFAAdministration
+actor Referee
+usecase ScheduleReferees
+usecase CollectAvailability
+usecase AutoGenerateSchedule
+usecase CheckSchedule
+usecase ConfirmSchedule
+usecase NotifyReferees
+class SchedulingSystem
+
+IFAAdministration --> ScheduleReferees
+Referee --> CollectAvailability
+CollectAvailability --> AutoGenerateSchedule
+AutoGenerateSchedule --> CheckSchedule
+CheckSchedule --> ConfirmSchedule
+ConfirmSchedule --> NotifyReferees
+NotifyReferees --> SchedulingSystem
+@enduml

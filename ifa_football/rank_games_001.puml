@@ -1,0 +1,16 @@
+@startuml
+actor IFAAdministration
+usecase RankGames
+usecase ApproveGameReport
+usecase CalculateRanking
+usecase UpdateRanking
+usecase PublishRanking
+class RankingSystem
+
+IFAAdministration --> RankGames
+RankGames --> ApproveGameReport
+ApproveGameReport --> CalculateRanking
+CalculateRanking --> UpdateRanking
+UpdateRanking --> PublishRanking
+PublishRanking --> RankingSystem
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+actor IFAAdministration
+actor Team
+usecase ApproveReport
+usecase CalculateRanking
+usecase UpdateLeague
+usecase ViewRanking
+class RankingSystem
+class Portal
+
+IFAAdministration --> ApproveReport
+ApproveReport --> CalculateRanking
+CalculateRanking --> UpdateLeague
+UpdateLeague --> RankingSystem
+RankingSystem --> Portal
+Team --> ViewRanking
+ViewRanking --> Portal
+@enduml

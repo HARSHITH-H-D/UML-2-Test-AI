@@ -1,0 +1,18 @@
+@startuml
+actor IFAAdministration
+actor Team
+usecase QuarterlyAudit
+usecase ReviewBudget
+usecase CheckCompliance
+usecase ProvideApproval
+class BudgetAuditSystem
+class PolicyChecker
+
+IFAAdministration --> QuarterlyAudit
+QuarterlyAudit --> ReviewBudget
+ReviewBudget --> CheckCompliance
+CheckCompliance --> ProvideApproval
+ProvideApproval --> BudgetAuditSystem
+BudgetAuditSystem --> PolicyChecker
+Team --> BudgetAuditSystem
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+actor TeamAdministrator
+actor IFAAdministration
+usecase EnterTransaction
+usecase AutomaticValidation
+usecase ProcessApproval
+usecase LogOverride
+class PolicyEngine
+class ResourceSystem
+
+TeamAdministrator --> EnterTransaction
+EnterTransaction --> AutomaticValidation
+AutomaticValidation --> ProcessApproval
+ProcessApproval --> PolicyEngine
+PolicyEngine --> ResourceSystem
+IFAAdministration --> LogOverride
+LogOverride --> ResourceSystem
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+actor Referee
+participant "GameReportSystem" as System
+participant "GameReport" as Report
+participant "Event" as Event
+database "Database" as DB
+
+Referee -> System: startGame()
+activate System
+System -> Report: create()
+activate Report
+Report --> System: gameStarted
+System --> Referee: showEvents()
+deactivate System
+
+loop During Game
+  Referee -> System: selectEvent(eventType)
+  activate System
+  System -> Event: create(eventType)
+  activate Event
+  Event --> System: eventCreated
+  deactivate Event
+  System -> Report: addEvent(event)
+  Report --> System: eventAdded
+  System --> Referee: eventRecorded
+  deactivate System
+end
+
+Referee -> System: announceExtraTime(minutes)
+activate System
+System -> Report: addExtraTime(minutes)
+Report --> System: extraTimeAdded
+System --> Referee: extraTimeRecorded
+deactivate System
+
+Referee -> System: announceHalfTime()
+activate System
+System -> Report: markHalfTime()
+Report --> System: halfTimeMarked
+System --> Referee: breakStarted
+deactivate System
+
+Referee -> System: endGame()
+activate System
+System -> Report: closeGame()
+Report --> System: gameClosed
+System --> Referee: showSummaryForm()
+deactivate System
+
+Referee -> System: addSummary(text)
+activate System
+System -> Report: addSummary(text)
+Report --> System: summaryAdded
+System --> Referee: readyToSubmit
+deactivate System
+
+Referee -> System: submitReport()
+activate System
+System -> Report: finalize()
+Report -> DB: save()
+DB --> Report: saved
+Report --> System: reportSubmitted
+System --> Referee: confirmationMessage
+deactivate System
+deactivate Report
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+actor Referee
+usecase GiveAvailability
+usecase CheckCalendar
+usecase FillAvailability
+usecase ConfirmSchedule
+class SchedulingSystem
+
+Referee --> GiveAvailability
+GiveAvailability --> CheckCalendar
+CheckCalendar --> FillAvailability
+FillAvailability --> ConfirmSchedule
+ConfirmSchedule --> SchedulingSystem
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+actor administrador_campamento
+actor miembro_personal_campamento
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+actor IFAAdministration
+usecase ReceiveNotification
+usecase AuditBudget
+usecase ValidateTransactions
+usecase ApproveBudget
+usecase DisapproveBudget
+usecase SendFeedback
+class QuarterlyAuditSystem
+
+IFAAdministration --> ReceiveNotification
+ReceiveNotification --> AuditBudget
+AuditBudget --> ValidateTransactions
+ValidateTransactions --> ApproveBudget
+ValidateTransactions --> DisapproveBudget
+DisapproveBudget --> SendFeedback
+ApproveBudget --> QuarterlyAuditSystem
+SendFeedback --> QuarterlyAuditSystem
+@enduml

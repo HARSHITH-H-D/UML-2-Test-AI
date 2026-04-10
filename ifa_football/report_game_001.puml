@@ -1,0 +1,18 @@
+@startuml
+actor Referee
+usecase ReportGame
+usecase StartGame
+usecase RecordEvent
+usecase ManageExtraTime
+usecase EndGame
+usecase SubmitReport
+class GameReportSystem
+
+Referee --> ReportGame
+ReportGame --> StartGame
+StartGame --> RecordEvent
+RecordEvent --> ManageExtraTime
+ManageExtraTime --> EndGame
+EndGame --> SubmitReport
+SubmitReport --> GameReportSystem
+@enduml
