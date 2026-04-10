@@ -157,7 +157,7 @@ HF_API_URL = "https://router.huggingface.co/v1/chat/completions"
 MODEL      = "meta-llama/Llama-3.1-8B-Instruct"
 
 # ── API KEY — Set your Hugging Face key here (programmer config only) ──────
-HF_API_KEY = "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"   # ← Replace with your actual key
+HF_API_KEY = "Add your API Key"   # ← Replace with your actual key
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DATA CLASSES
