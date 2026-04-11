@@ -138,7 +138,7 @@ pipeline.export_test_cases(test_cases, 'html', 'test_cases.html')
 # With actual LLM (requires API key)
 pipeline = TestCaseGenerationPipeline(
     use_llm=True,
-    api_key='AIzaSyAWG7Pdsv8iiKkzQT0teVF2gOl3e9bvyhw'
+    api_key='Replace with your API key'
 )
 
 # Generate with custom variations
