@@ -12,7 +12,7 @@ Get your FREE API key: https://makersuite.google.com/app/apikey
 # ============================================================================
 
 # Option 1: Set your API key here directly
-GEMINI_API_KEY = "AIzaSyAWG7Pdsv8iiKkzQT0teVF2gOl3e9bvyhw"  # ← REPLACE THIS with your key from https://makersuite.google.com/app/apikey
+GEMINI_API_KEY = "Enter your API key"  # ← REPLACE THIS with your key from https://makersuite.google.com/app/apikey
 
 # Option 2: Or use environment variable (more secure)
 import os
